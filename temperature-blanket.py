@@ -140,27 +140,27 @@ def view_summary(date, data_list):
 def granny_square_pattern():
     """Display granny square pattern instructions."""
     print(
-        "Simple Granny Square Pattern (Magic Ring Version)\n"
-        "\n"
-        "Round 1:\n"
-        "- Make a magic ring. (or chain 4, join with slip stitch to form a ring)\n"
-        "- Ch 3 (counts as dc), then work 2 dc into the ring.\n"
-        "- *Ch 2, 3 dc into the ring* — repeat 3 more times.\n"
-        "- Ch 2 and pull the ring closed.\n"
-        "- Join with a sl st to the top of the beginning ch-3.\n"
-        "\n"
-        "Round 2:\n"
-        "- Sl st into the next ch-2 corner space.\n"
-        "- Ch 3, 2 dc, ch 2, 3 dc in the same corner.\n"
-        "- In each remaining corner: 3 dc, ch 2, 3 dc.\n"
-        "- Join with a sl st.\n"
-        "\n"
-        "Round 3 and Beyond:\n"
-        "- In each corner: 3 dc, ch 2, 3 dc.\n"
-        "- In each side space: 3 dc.\n"
-        "- Join with a sl st at the end of each round.\n"
-        "\n"
-        "Continue until your square is the size you want!"
+        """Simple Granny Square Pattern (Magic Ring Version)
+        
+        Round 1:
+        - Make a magic ring. (or chain 4, join with slip stitch to form a ring)
+        - Ch 3 (counts as dc), then work 2 dc into the ring.
+        - *Ch 2, 3 dc into the ring* — repeat 3 more times.
+        - Ch 2 and pull the ring closed.
+        - Join with a sl st to the top of the beginning ch-3.
+        
+        Round 2:
+        - Sl st into the next ch-2 corner space.
+        - Ch 3, 2 dc, ch 2, 3 dc in the same corner.
+        - In each remaining corner: 3 dc, ch 2, 3 dc.
+        - Join with a sl st.
+        
+        Round 3 and Beyond:
+        - In each corner: 3 dc, ch 2, 3 dc.
+        - In each side space: 3 dc.
+        - Join with a sl st at the end of each round.
+        
+        Continue until your square is the size you want!"""
     )
 
 def blanket_instructions():
