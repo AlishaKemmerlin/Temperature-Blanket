@@ -1,6 +1,32 @@
 import datetime
 import json
 
+color_ranges = {
+    "Black": range(-30, 0),
+    "Ice Blue": range(0, 30),
+    "Dark Blue": range(30, 40), 
+    "Blue": range(40, 50), 
+    "Teal": range(50, 60), 
+    "Green": range(60, 70),
+    "Yellow": range(70, 80), 
+    "Orange": range(80, 90), 
+    "Red": range(90, 100),
+    "Burgundy": range(100, 150)
+}
+
+yarn_map = {
+    "Black": "312 - Black",
+    "Ice Blue": "381 - Light Blue", 
+    "Dark Blue": "387 - Soft Navy", 
+    "Blue": "385 - Royal", 
+    "Teal": "631 - Light Sage", 
+    "Green": "389 - Hunter Green",     
+    "Yellow": "324 - Bright Yellow",
+    "Orange": "254 - Pumpkin", 
+    "Red": "319 - Cherry Red",
+    "Burgundy": "378 - Claret"
+}
+
 #temperature helpers
 def fetch_temperature(): #helper
     """Prompts user to manually enter the high temperature for the day."""
@@ -44,18 +70,38 @@ def date_selection(): #helper
             except ValueError:
                 print("Invalid date format. Please enter as YYYY-MM-DD.")
 
-def select_saved_date(): #helper
-    """Prompt user to select a date to view."""
+def select_saved_date(data_list):
+    """Prompt user to select a date that exists in saved entries."""
+    
+    if not data_list:
+        print("No saved entries yet.")
+        return None
+
+    print("\nSaved Dates:")
+    for entry in data_list:
+        print(f"- {entry['date']}")
+
     while True:
-        date_str = input("Enter the date you want to view (YYYY-MM-DD): ")
+        date_str = input("Enter the date you want to select (YYYY-MM-DD): ").strip()
+
+        # Validate format
         try:
             dt = datetime.datetime.strptime(date_str, "%Y-%m-%d").date()
-            if dt > datetime.date.today():
-                print("The date cannot be in the future. Try again.")
-            else:
-                return date_str
         except ValueError:
             print("Invalid date format. Please enter as YYYY-MM-DD.")
+            continue
+
+        # Validate not future
+        if dt > datetime.date.today():
+            print("The date cannot be in the future. Try again.")
+            continue
+
+        # Validate it exists in saved entries
+        if any(entry["date"] == date_str for entry in data_list):
+            return date_str
+        
+        print("That date is not in your saved entries. Try again.")
+
 
 def save_data(data_list):
     """Write the full data list to the JSON file safely."""
