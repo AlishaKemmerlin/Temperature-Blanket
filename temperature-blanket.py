@@ -5,20 +5,40 @@ from edit_menu import (
     delete_one_entry,
     delete_all_entries,
     edit_temperature,
-    select_saved_date
+)
+from helpers import (
+    fetch_temperature, 
+    map_color, 
+    map_yarn_color,
+    date_selection,
+    select_saved_date,
+    save_data
 )
 
-
 color_ranges = {
-    "Ice Blue": range(-50, 30), "Dark Blue": range(30, 40),
-    "Blue": range(40, 50), "Teal": range(50, 60), "Green": range(60, 70),
-    "Yellow": range(70, 80), "Orange": range(80, 90), "Red": range(90, 200)
+    "Black": range(-30, 0),
+    "Ice Blue": range(0, 30),
+    "Dark Blue": range(30, 40), 
+    "Blue": range(40, 50), 
+    "Teal": range(50, 60), 
+    "Green": range(60, 70),
+    "Yellow": range(70, 80), 
+    "Orange": range(80, 90), 
+    "Red": range(90, 100),
+    "Burgundy": range(100, 150)
 }
 
 yarn_map = {
-    "Ice Blue": "Light Blue", "Dark Blue": "Soft Navy", 
-    "Blue": "Cobalt Blue", "Teal": "Pale Teal", "Green": "Castleton Green",     "Yellow": "Caron Baby Sunshine",
-    "Orange": "Pumpkin", "Red": "Cherry Red"
+    "Black": "312 - Black",
+    "Ice Blue": "381 - Light Blue", 
+    "Dark Blue": "387 - Soft Navy", 
+    "Blue": "385 - Royal", 
+    "Teal": "631 - Light Sage", 
+    "Green": "389 - Hunter Green",     
+    "Yellow": "324 - Bright Yellow",
+    "Orange": "254 - Pumpkin", 
+    "Red": "319 - Cherry Red",
+    "Burgundy": "378 - Claret"
 }
 
 def main():
@@ -74,59 +94,6 @@ def home_menu(data_list):
         else:
             print("Invalid choice. Please try again.")
 
-
-def fetch_temperature():
-    """Prompts user to manually enter the high temperature for the day."""
-    # Later will use API to call for selected date's high temperature.
-    
-    while True: 
-        temp_string = input("Enter today's high temperature. (in Fahrenheit)")
-        try:
-            todays_temp = int(temp_string)
-            return todays_temp
-        except ValueError:
-            print("Please enter a valid number (ex. 57)")
-
-
-def map_color(todays_temp):
-    """Map temperature to color."""
-    for color, temp_range in color_ranges.items():
-            if todays_temp in temp_range:
-                return color
- 
-def date_selection():
-    try:
-        # Try to get today's date from the system
-        todays_date = datetime.date.today()
-        return str(todays_date)
-    except Exception:
-        # If system date fails, ask the user (until input is valid and not future)
-        while True:
-            todays_date = input("Input the date (YYYY-MM-DD): ")
-            try:
-                dt = datetime.datetime.strptime(todays_date, "%Y-%m-%d").date()
-                if dt > datetime.date.today():
-                    print("The date cannot be in the future. Please try again.")
-                else:
-                    return todays_date  # Always returning 'todays_date'
-            except ValueError:
-                print("Invalid date format. Please enter as YYYY-MM-DD.")
-
-def select_saved_date():
-    while True:
-        date_str = input("Enter the date you want to view (YYYY-MM-DD): ")
-        try:
-            dt = datetime.datetime.strptime(date_str, "%Y-%m-%d").date()
-            if dt > datetime.date.today():
-                print("The date cannot be in the future. Try again.")
-            else:
-                return date_str
-        except ValueError:
-            print("Invalid date format. Please enter as YYYY-MM-DD.")
-
-def map_yarn_color(temp_color):
-    return yarn_map.get(temp_color)
-
 def create_entry(todays_date, data_list):
     for record in data_list:
         if record["date"] == todays_date:
@@ -141,7 +108,7 @@ def create_entry(todays_date, data_list):
             todays_temp = fetch_temperature()
             temp_color = map_color(todays_temp)
         else:
-            temp_color = input("Enter a color: red, orange, yellow, green, teal, blue, dark blue, ice blue").strip().title()
+            temp_color = input("Enter a color \n(burgundy, red, orange, yellow, green, teal, blue, dark blue, ice blue, black):").strip().title()
     yarn_color = map_yarn_color(temp_color)
     print(f"The temperature in your area is: {todays_temp}°F. \nToday's yarn color is: {yarn_color}")
     record_day(todays_date, data_list, todays_temp, temp_color, yarn_color, completed=True)
@@ -149,7 +116,6 @@ def create_entry(todays_date, data_list):
 
 def record_day(todays_date, data_list, todays_temp, temp_color, yarn_color, completed):
     # create a dictionary entry for the day
-
     day_entry = {
     "date": todays_date,
     "temperature": todays_temp,
@@ -158,12 +124,7 @@ def record_day(todays_date, data_list, todays_temp, temp_color, yarn_color, comp
     "completed": completed
     }
     data_list.append(day_entry)
-    try:
-        with open("my_blanket_data.json", "w") as f:
-            json.dump(data_list, f)
-            print("Data Saved")
-    except Exception as e:
-        print("Something went wrong. Data not saved. Error:", e)
+    save_data(data_list)
 
 def view_summary(date, data_list):
     for record in data_list:
@@ -213,10 +174,10 @@ def blanket_instructions():
         - Day 1 has TWO rounds:
             • the center round (Round 1)
             • the temperature round for Day 1
-        - By the end of the month, your square will have 29–32 rounds"
-          depending on how many days are in that month"
+        - By the end of the month, your square will have 29–32 rounds
+          depending on how many days are in that month
         - Each round's color is based on that day's high temperature.
-        As you finish each month, you can join the squares right away"
+        As you finish each month, you can join the squares right away
         or wait until the end of the year.  Either way works!"
         
         When the year is complete, you'll have 12 beautiful squares that
