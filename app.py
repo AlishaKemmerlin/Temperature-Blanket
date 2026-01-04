@@ -15,32 +15,6 @@ from helpers import (
     save_data
 )
 
-color_ranges = {
-    "Black": range(-30, 0),
-    "Ice Blue": range(0, 30),
-    "Dark Blue": range(30, 40), 
-    "Blue": range(40, 50), 
-    "Teal": range(50, 60), 
-    "Green": range(60, 70),
-    "Yellow": range(70, 80), 
-    "Orange": range(80, 90), 
-    "Red": range(90, 100),
-    "Burgundy": range(100, 150)
-}
-
-yarn_map = {
-    "Black": "312 - Black",
-    "Ice Blue": "381 - Light Blue", 
-    "Dark Blue": "387 - Soft Navy", 
-    "Blue": "385 - Royal", 
-    "Teal": "631 - Light Sage", 
-    "Green": "389 - Hunter Green",     
-    "Yellow": "324 - Bright Yellow",
-    "Orange": "254 - Pumpkin", 
-    "Red": "319 - Cherry Red",
-    "Burgundy": "378 - Claret"
-}
-
 def main():
     """App Start"""
     try:
@@ -80,7 +54,7 @@ def home_menu(data_list):
             if not data_list:
                 print("No saved days yet.")
                 continue
-            date = select_saved_date()
+            date = select_saved_date(data_list)
             view_summary(date, data_list)
         elif choice == "3":
             granny_square_pattern()
