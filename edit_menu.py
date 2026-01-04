@@ -1,3 +1,5 @@
+from helpers import (fetch_temperature, map_color, map_yarn_color, select_saved_date)
+
 def edit_menu(data_list):
     while True:
         print("\nEdit Menu:")
@@ -21,7 +23,7 @@ def edit_menu(data_list):
             print("Invalid choice. Try again.")
 
 def delete_one_entry(data_list):
-    date = select_saved_date()
+    date = select_saved_date(data_list)
     for record in data_list:
         if record["date"] == date:
             yes_no = input(f"Are you sure you want to delete the entry for {date}? (y/n): ").lower()
@@ -45,7 +47,7 @@ def delete_all_entries(data_list):
         print("Deletion cancelled.")
 
 def edit_temperature(data_list):
-    date = select_saved_date()
+    date = select_saved_date(data_list)
     for record in data_list:
         if record["date"] == date:
             print(f"Current temperature: {record['temperature']}°F") 
