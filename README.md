@@ -1,6 +1,12 @@
 # 🧶 Crochet Temperature Blanket App
 A cozy blend of code, color, and creativity.
 
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![Status](https://img.shields.io/badge/Project-Learning_Project-purple)
+![Category](https://img.shields.io/badge/Type-Creative_Coding-pink)
+![Last Commit](https://img.shields.io/github/last-commit/AlishaKemmerlin/Temperature-Blanket)
+![Crochet Project](https://img.shields.io/badge/Crochet_Project-%F0%9F%A7%B6-pink)
+
 ---
 
 ## ✨ Overview
