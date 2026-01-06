@@ -1,5 +1,9 @@
 from helpers.display import divider_line
 
+def pause():
+    """Pause the program until the user presses Enter."""
+    input("\nPress Enter to continue...")
+
 
 def granny_square_pattern():
     """Display a generic pattern for a granny square using a magic ring."""
@@ -27,6 +31,7 @@ def granny_square_pattern():
         
         Continue until your square is the size you want!"""
     )
+
 
 def blanket_instructions():
     """Displays the instructions for making the temperature blanket using this app."""

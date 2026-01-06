@@ -1,4 +1,5 @@
 from helpers.dates import select_saved_date
+from helpers.instructions import pause
 from helpers.temperature import fetch_temperature, map_color
 from helpers.colors import map_yarn_color
    
@@ -12,6 +13,7 @@ def delete_one_entry(data_list):
             if yes_no == "y":
                 data_list.remove(record)
                 print(f"Entry for {date} deleted.")
+                pause()
                 return
             else:
                 print("Deletion cancelled.")
@@ -25,6 +27,7 @@ def delete_all_entries(data_list):
         if confirm == "y":
             data_list.clear()
             print("All entries deleted. Starting fresh!")
+            pause()
     else:
         print("Deletion cancelled.")
 
@@ -45,5 +48,6 @@ def edit_temperature(data_list):
             record["color"] = new_color
             record["yarn_color"] = new_yarn_color
             print(f"Entry for {date} updated.")
+            pause()
             return
     print("No entry found for that date.")

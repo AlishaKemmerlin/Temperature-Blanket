@@ -35,4 +35,3 @@ def record_day(todays_date, data_list, todays_temp, temp_color, yarn_color, comp
     data_list.append(day_entry)
     save_data(data_list)
     return data_list
-

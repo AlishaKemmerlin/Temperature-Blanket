@@ -6,7 +6,7 @@ from helpers.storage import load_data
 from edit_menu import edit_menu
 from helpers.view_entry import view_summary
 from helpers.display import welcome_header, main_menu_header, divider_line, exit_message
-from helpers.instructions import blanket_instructions, granny_square_pattern
+from helpers.instructions import blanket_instructions, granny_square_pattern, pause
 
 def main():
     """App Start"""
@@ -60,8 +60,10 @@ def instructions_menu():
 
     if choice == "1":
         blanket_instructions()
+        pause()
     elif choice == "2":
         granny_square_pattern()
+        pause()
     elif choice == "3":
         return
     else:
